@@ -3,7 +3,6 @@ package com.nk.aoptodetermineruntime.Common;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nk.aoptodetermineruntime.AopExample.Constants;
-import org.aspectj.apache.bcel.classfile.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -20,6 +19,7 @@ public class Utilities {
         //don't allow this class to be instantiated
     }
 
+
     public static String getTransactionId(){
         //fixing the processing result up with the transaction Id
         if(MDC.get(Constants.TRANS_ID)==null){
@@ -30,11 +30,9 @@ public class Utilities {
     }
 
 
-    
-
     //This Method will take a model type object and convert it to a string in a json format.
     public static String objectToString(Object object){
-        logger.info("Converting object to String "+object.getClass().getName());
+        logger.info("Converting "+object.getClass().getSimpleName()+" object to String ");
 
         ObjectMapper objectMapper=new ObjectMapper();
         try{

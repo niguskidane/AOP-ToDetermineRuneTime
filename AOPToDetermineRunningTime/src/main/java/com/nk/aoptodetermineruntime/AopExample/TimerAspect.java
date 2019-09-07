@@ -18,7 +18,7 @@ public class TimerAspect {
     @Around("@annotation(LogRunningTime), returning=result")
     public Object logRunningTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
-      logger.info(proceedingJoinPoint.getTarget().getClass().getSimpleName()+ " ------>>>>>> " +proceedingJoinPoint.getSignature().getName()+" method has begun" );
+      logger.info(proceedingJoinPoint.getTarget().getClass().getSimpleName()+ " ------>>>>>> " +proceedingJoinPoint.getSignature().getName()+" method has begun execution" );
 
       long startingTime=System.currentTimeMillis();
 
@@ -26,7 +26,7 @@ public class TimerAspect {
 
       long endTime=System.currentTimeMillis();
 
-      logger.info(proceedingJoinPoint.getTarget().getClass().getSimpleName()+ " ------>>>>>> " +proceedingJoinPoint.getSignature().getName()+" method finished in "+(endTime-startingTime) +" ms" );
+      logger.info(proceedingJoinPoint.getTarget().getClass().getSimpleName()+ " ------>>>>>> " +proceedingJoinPoint.getSignature().getName()+" method finished execution in "+(endTime-startingTime) +" ms" );
 
       return result;
 
