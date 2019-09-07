@@ -10,7 +10,9 @@ import java.util.List;
 public class ProductService {
 
     @LogRunningTime
-    public List<Product> buildProduct(){
+    public List<Product> buildProduct() throws InterruptedException {
+
+        Thread.sleep(2000);
         List<Product> products= Arrays.asList(new Product("1001","IPhone",100, "Apple"),
                 new Product("1002", "MacBook", 200, "Apple")
         );

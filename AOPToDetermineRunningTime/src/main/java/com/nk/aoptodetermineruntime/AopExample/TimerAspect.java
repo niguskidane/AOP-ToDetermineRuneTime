@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 public class TimerAspect {
 
-    Logger logger= LoggerFactory.getLogger(TimerAspect.class);
+    private Logger logger= LoggerFactory.getLogger(TimerAspect.class);
 
     @Around("@annotation(LogRunningTime), returning=result")
     public Object logRunningTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
