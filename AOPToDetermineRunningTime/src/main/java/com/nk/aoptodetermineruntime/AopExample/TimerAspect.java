@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Aspect
 @Configuration
-
 public class TimerAspect {
 
     private Logger logger= LoggerFactory.getLogger(TimerAspect.class);

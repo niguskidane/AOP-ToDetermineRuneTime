@@ -1,14 +1,14 @@
 package com.nk.aoptodetermineruntime.Service;
 
 import com.nk.aoptodetermineruntime.AopExample.LogRunningTime;
+import com.nk.aoptodetermineruntime.AopExample.SaveEvent;
+import com.nk.aoptodetermineruntime.common.BaseResponse;
+import com.nk.aoptodetermineruntime.common.ProcessingResults;
 import com.nk.aoptodetermineruntime.model.Product;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 @Service
 public class ProductService {
@@ -28,13 +28,25 @@ public class ProductService {
     }
 
     @Async
-    public void saveProduct(Product product){
+    @LogRunningTime
+    @SaveEvent(value = "ADD_PRO_INFO", replay = true)
+    public BaseResponse saveProduct(Product product){
         products.add(product);
+        BaseResponse baseResponse=new BaseResponse("ProductInfo");
+        ProcessingResults processingResults=new ProcessingResults();
+        baseResponse.setResponseData(product);
+        baseResponse.setProcessingResults(processingResults);
+        return baseResponse;
     }
 
-    public Product getSingleProduct(String productId){
+    @SaveEvent(value = "PRO_INFO", replay = true)
+    public BaseResponse getSingleProduct(String productId){
         Product product=products.stream().filter(p->p.getId().equals(productId)).findAny().orElse(null);
-        return product;
+        BaseResponse baseResponse=new BaseResponse("ProductInfo");
+        ProcessingResults processingResults=new ProcessingResults();
+        baseResponse.setResponseData(product);
+        baseResponse.setProcessingResults(processingResults);
+        return baseResponse;
     }
 
     public void deleteProduct(String productId){

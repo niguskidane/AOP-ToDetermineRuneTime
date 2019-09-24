@@ -1,17 +1,15 @@
-package com.nk.aoptodetermineruntime.Common;
+package com.nk.aoptodetermineruntime.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nk.aoptodetermineruntime.AopExample.CompanyException;
 import com.nk.aoptodetermineruntime.AopExample.Constants;
 import com.nk.aoptodetermineruntime.model.Header;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 import java.text.ParseException;

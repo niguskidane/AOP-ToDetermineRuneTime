@@ -7,7 +7,7 @@ Custom Annotation Example
  */
 
 @Retention(RetentionPolicy.RUNTIME)
-@Inherited
+//@Inherited
 @Target(ElementType.METHOD)
 public @interface LogRunningTime {
 

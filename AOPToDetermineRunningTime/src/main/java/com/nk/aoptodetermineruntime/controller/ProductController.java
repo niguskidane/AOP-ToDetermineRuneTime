@@ -1,12 +1,15 @@
 package com.nk.aoptodetermineruntime.controller;
 
 import com.nk.aoptodetermineruntime.AopExample.LogRunningTime;
-import com.nk.aoptodetermineruntime.Common.Utilities;
+import com.nk.aoptodetermineruntime.common.BaseResponse;
+import com.nk.aoptodetermineruntime.common.Utilities;
 import com.nk.aoptodetermineruntime.Service.ProductService;
 import com.nk.aoptodetermineruntime.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,15 +25,20 @@ public class ProductController {
 
     @PostMapping("/products")
     @LogRunningTime
-    public void addProduct(@RequestBody Product product) {
+    public ResponseEntity<BaseResponse> addProduct(@RequestBody Product product) {
         logger.warn("addProduct input data : " + Utilities.objectToString(product));
-        productService.saveProduct(product);
+        BaseResponse baseResponse=productService.saveProduct(product);
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.CREATED);
+
     }
 
     @GetMapping("/products/{productId}")
     @LogRunningTime
-    public Product getProduct(@PathVariable("productId") String productId) {
-        return productService.getSingleProduct(productId);
+    public ResponseEntity<BaseResponse> getProduct(@PathVariable("productId") String productId) {
+        BaseResponse baseResponse=productService.getSingleProduct(productId);
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
     @GetMapping("/products")
